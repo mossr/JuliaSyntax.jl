@@ -324,6 +324,7 @@ end
                     "struct",
                     "try",
                     "using",
+                    "utilizing",
                     "while",
 
                     "abstract",
@@ -956,6 +957,7 @@ const all_kws = Set([
     "struct",
     "try",
     "using",
+    "utilizing",
     "while",
     # Contextual keywords
     "abstract",

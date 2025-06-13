@@ -2539,7 +2539,7 @@ function parse_import(ps::ParseState, word, has_import_prefix)
         bump(ps, TRIVIA_FLAG)
         parse_atsym(ps, false)
         emit(ps, mark, K"as")
-        if word == K"using" && !has_import_prefix
+        if (word == K"using" || word == K"utilizing") && !has_import_prefix
             # using A as B     ==>  (using (error (as (importpath A) B)))
             # using A, B as C  ==>  (using (importpath A) (error (as (importpath B) C)))
             emit(ps, mark, K"error",

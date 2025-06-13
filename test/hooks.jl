@@ -170,6 +170,7 @@ end
                 # could be `try x catch exc body end` or `try x catch ; body end`
                 "try x catch"  => :block
                 "using"        => :other
+                "utilizing"    => :other
                 "import"       => :other
                 "local"        => :other
                 "global"       => :other

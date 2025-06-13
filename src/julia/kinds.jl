@@ -227,6 +227,7 @@ register_kinds!(JuliaSyntax, 0, [
         "struct"
         "try"
         "using"
+        "utilizing"
         "while"
         "BEGIN_BLOCK_CONTINUATION_KEYWORDS"
             "catch"
