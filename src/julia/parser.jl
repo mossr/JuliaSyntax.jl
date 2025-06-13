@@ -243,7 +243,7 @@ function is_initial_reserved_word(ps::ParseState, k)
     k = kind(k)
     is_iresword = k in KSet"begin while if for try return break continue function
                             macro quote let local global const do struct module
-                            baremodule using import export"
+                            baremodule using utilizing import export"
     # `begin` means firstindex(a) inside a[...]
     return is_iresword && !(k == K"begin" && ps.end_symbol)
 end
@@ -2040,7 +2040,7 @@ function parse_resword(ps::ParseState)
         bump(ps, TRIVIA_FLAG)
         parse_comma_separated(ps, x->parse_atsym(x, false))
         emit(ps, mark, word)
-    elseif word in KSet"import using"
+    elseif word in KSet"import using utilizing"
         parse_imports(ps)
     elseif word == K"do"
         bump(ps, TRIVIA_FLAG, error="invalid `do` syntax")
@@ -2481,7 +2481,7 @@ end
 function parse_imports(ps::ParseState)
     mark = position(ps)
     word = peek(ps)
-    @check word in KSet"import using"
+    @check word in KSet"import using utilizing"
     bump(ps, TRIVIA_FLAG)
     emark = position(ps)
     initial_as = parse_import(ps, word, false)
@@ -2494,7 +2494,7 @@ function parse_imports(ps::ParseState)
         has_import_prefix = true
         if initial_as
             # import A as B: x  ==>  (import (: (error (as (importpath A) B)) (importpath x)))
-            emit(ps, emark, K"error", error="`as` before `:` in import/using")
+            emit(ps, emark, K"error", error="`as` before `:` in import/using/utilizing")
         end
     elseif k == K","
         bump(ps, TRIVIA_FLAG)
